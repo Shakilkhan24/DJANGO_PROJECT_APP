@@ -1,0 +1,74 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container signup-container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg rounded">
+        <div class="card-header bg-info text-white"> <!-- Change the background color to 'bg-info' -->
+          <h1 class="text-center mb-0">Sign Up</h1>
+        </div>
+        <div class="card-body">
+          <form method="post" class="signup-form">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-info btn-block rounded-pill">Sign Up</button> <!-- Change the button color to 'btn-info' -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<style>
+  .signup-container {
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    padding: 60px 30px; /* Increase the padding for top and bottom */
+    border-radius: 20px; /* Increase the border radius */
+  }
+
+  .card {
+    border: none;
+    border-radius: 20px; /* Increase the border radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    background-color: #17a2b8; /* Change the background color */
+    border-top-left-radius: 20px; /* Increase the border radius */
+    border-top-right-radius: 20px; /* Increase the border radius */
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    border-radius: 10px; /* Decrease the border radius */
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #17a2b8; /* Change the border color */
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25); /* Change the box shadow color */
+  }
+
+  .btn-primary {
+    background-color: #17a2b8; /* Change the background color */
+    border-color: #17a2b8; /* Change the border color */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #117a8b; /* Change the background color on hover */
+    border-color: #0f6c7a; /* Change the border color on hover */
+  }
+</style>

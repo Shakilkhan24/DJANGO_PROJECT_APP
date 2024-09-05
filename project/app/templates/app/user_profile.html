@@ -1,0 +1,102 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #c220e3;
+        }
+
+        .profile-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .profile-img {
+            max-width: 150px;
+            max-height: 150px;
+            border: 3px solid #9b1cb8;
+            padding: 5px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #9b1cb8;
+        }
+
+        .profile-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .profile-info a.btn-link {
+            color: #9b1cb8;
+            text-decoration: none;
+        }
+
+        .profile-info a.btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #9b1cb8;
+            border-color: #9b1cb8;
+        }
+
+        .btn-primary:hover {
+            background-color: #7a1590;
+            border-color: #7a1590;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="profile-card">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="img-fluid profile-img">
+                            {% else %}
+                                <img src="{% static 'default-profile.png' %}" alt="Default Profile Picture" class="img-fluid profile-img">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="profile-info">
+                                <h2>{{ user.username }}</h2>
+                                <p><strong>Name:</strong> {{ user.name }}</p>
+                                <p><strong>Email:</strong> {{ user.email }}</p>
+                                <p><strong>GitHub:</strong> <a href="{{ user.github_link }}" target="_blank" class="btn btn-link">{{ user.github_link }}</a></p>
+                                <p><strong>LinkedIn:</strong> <a href="{{ user.linkedin_link }}" target="_blank" class="btn btn-link">{{ user.linkedin_link }}</a></p>
+                                <p><strong>Short Bio:</strong> {{ user.short_bio }}</p>
+                                <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

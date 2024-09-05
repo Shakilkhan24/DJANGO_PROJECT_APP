@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-4" style="background-color: #f0f0f0; border-radius: 10px;">
+                    <h2 class="card-title text-center mb-4" style="color: #e6b800;">Create a New Blog Post</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary btn-block" style="background-color: #e6b800; border-color: #e6b800; color: #6832a8;">Create Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        background-color: #f7f7f7;
+    }
+    .card-body {
+        padding: 2rem;
+    }
+    .card-title {
+        font-weight: bold;
+    }
+    .btn-primary:hover {
+        background-color: #cc9f00;
+        border-color: #cc9f00;
+    }
+</style>
+{% endblock %}
