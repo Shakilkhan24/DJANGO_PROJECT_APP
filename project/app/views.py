@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import AuthenticationForm
-from.forms import SignUpForm, ProfileForm, BlogPostForm, CommentForm
-from.models import CustomUser, BlogPost, Comment, Tag, BlogPostTag
+from .forms import SignUpForm, ProfileForm, BlogPostForm, CommentForm
+from .models import CustomUser, BlogPost, Comment, Tag, BlogPostTag
 from django.contrib import messages
 from .forms import CustomUserEditForm
 from django.contrib.auth.decorators import login_required
@@ -42,6 +42,7 @@ def profile_creation(request):
 def user_profile(request):
     return render(request, 'app/user_profile.html')
 
+
 @login_required
 def profile_edit(request):
     user = request.user
@@ -65,6 +66,8 @@ def custom_logout_view(request):
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
     return render(request, 'app/blog_list.html', {'blog_posts': blog_posts}) 
+
+
 
 from django.contrib.auth import get_user_model
 @login_required
@@ -102,6 +105,8 @@ def blog_detail(request, pk):
         'comments': comments,
         'form': form
     })
+
+
 
 def blog_edit(request, pk):
     blog_post = BlogPost.objects.get(pk=pk)
