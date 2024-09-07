@@ -5,8 +5,10 @@ from.forms import SignUpForm, ProfileForm, BlogPostForm, CommentForm
 from.models import CustomUser, BlogPost, Comment, Tag, BlogPostTag
 from django.contrib import messages
 from .forms import CustomUserEditForm
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from .forms import CustomUserEditForm
+
 
 class CustomLoginView(LoginView):
     template_name = 'app/login.html'  # Adjust this path based on your structure
@@ -22,44 +24,19 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'app/signup.html', {'form': form})
 
-from django.contrib.auth.decorators import login_required
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')  # Change 'blog_list' to 'home' or any other existing view name
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    else:
-        form = AuthenticationForm()
-    return render(request, 'app/login.html', {'form': form})
 
+@login_required
 def profile_creation(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            if not username:
-                messages.error(request, "Username field is missing.")
-                return render(request, 'app/profile.html', {'form': form})
-            if CustomUser.objects.filter(username=username).exists():
-                messages.error(request, "Username already exists. Please choose a different username.")
-                return render(request, 'app/profile.html', {'form': form})
-            else:
-                form.save()
-                return redirect('blog_list')
+            form.save()
+            messages.success(request, "Profile updated successfully.")
+            return redirect('blog_list')
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=request.user)
     return render(request, 'app/profile.html', {'form': form})
 
-from .forms import CustomUserEditForm
 
 @login_required
 def user_profile(request):
@@ -79,12 +56,6 @@ def profile_edit(request):
 
     return render(request, 'app/profile_edit.html', {'form': form})
 
-
-# def logout_view(request):
-#     logout(request)
-#     return redirect('login')from django.contrib.auth import logout
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 
 def custom_logout_view(request):
     logout(request)
