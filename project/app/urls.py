@@ -13,6 +13,7 @@ urlpatterns = [
     path('accounts/logout/', custom_logout_view, name='logout'),
     path('profile/', views.user_profile, name='user_profile'),  # This should match
     path('profile/edit/', views.profile_edit, name='profile_edit'),
+    path('blog/',views.blog_list,name='blog_list'),
     path('blog/create/', views.blog_create, name='blog_create'),
     path('blog/<pk>/', views.blog_detail, name='blog_detail'),
     path('blog/<pk>/edit/', views.blog_edit, name='blog_edit'),
