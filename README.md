@@ -15,7 +15,7 @@ Before you begin, ensure that you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/DJANGO_PROJECT_APP.git
+   git clone https://github.com/Shakilkhan24/django_project_app.git
    cd DJANGO_PROJECT_APP
    ```
 2. **Set up a virtual environment (recommended):**
