@@ -47,6 +47,3 @@ class CustomUserEditForm(UserChangeForm):
         widgets = {
             'profile_picture': forms.ClearableFileInput(attrs={'multiple': False}),
         }
-
-
-

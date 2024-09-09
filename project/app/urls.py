@@ -3,8 +3,6 @@ from . import views
 from app.views import custom_logout_view
 from app.views import CustomLoginView
 
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.blog_list, name='home'),
@@ -21,5 +19,5 @@ urlpatterns = [
     path('tag/', views.tag_list, name='tag_list'),
     path('tag/<pk>/', views.tag_detail, name='tag_detail'),
     path('search/', views.search, name='search'),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
