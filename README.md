@@ -32,7 +32,7 @@ Before you begin, ensure that you have the following installed:
    ```bash
    cd /Documents/DJANGO_PROJECT_APP/DJANGO_PROJECT_APP/project/
    ```
-5.**Run database migrations:**
+5. **Run database migrations:**
    ```bash
    python manage.py makemigrations
    python manage.py migrate
